@@ -14,7 +14,7 @@ class Operation
       user: username, password: password
     )
   rescue RestClient::ExceptionWithResponse => e
-    e.response.inspect
+    e.response
   end
 
   def headers
