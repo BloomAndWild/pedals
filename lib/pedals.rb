@@ -7,6 +7,7 @@ require 'pedals/operation'
 require 'pedals/client'
 require 'pedals/config'
 require 'pedals/quote/create_quote'
+require 'pedals/orders/create_order'
 require 'active_support/all'
 
 module Pedals

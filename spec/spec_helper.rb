@@ -8,7 +8,7 @@ require 'pedals'
 
 require_relative 'support/helpers/client_helper'
 
-Dotenv.load('.env.sample')
+Dotenv.load
 
 VCR.configure do |c|
   c.hook_into :webmock

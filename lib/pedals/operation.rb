@@ -6,18 +6,20 @@ class Operation
   end
 
   def execute
+    # For basic auth we're providing
+    # user & password param to Rest-Client Request object.
     RestClient::Request.execute(
       method: http_method, url: endpoint,
-      payload: payload, headers: headers
+      payload: payload, headers: headers,
+      user: username, password: password
     )
   rescue RestClient::ExceptionWithResponse => e
-    e.response
+    e.response.inspect
   end
 
   def headers
     {
-      content_type: 'application/json',
-      authorization: "#{username} #{payload}"
+      content_type: 'application/json'
     }.merge(options.fetch(:headers, {}))
   end
 
