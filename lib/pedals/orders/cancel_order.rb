@@ -2,13 +2,13 @@
 
 module Pedals
   module Orders
-    class CreateOrder < Operation
+    class CancelOrder < Operation
       def http_method
-        :post
+        :put
       end
 
-      def endpoint(_id = nil)
-        "#{base_url}/api/v1/orders"
+      def endpoint(id = nil)
+        "#{base_url}/api/v1/orders/#{id}"
       end
     end
   end

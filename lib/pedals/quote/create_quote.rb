@@ -7,7 +7,7 @@ module Pedals
         :post
       end
 
-      def endpoint
+      def endpoint(_id = nil)
         "#{base_url}/api/v1/quotes"
       end
     end

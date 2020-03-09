@@ -9,7 +9,7 @@ class Operation
     # For basic auth we're providing
     # user & password param to Rest-Client Request object.
     RestClient::Request.execute(
-      method: http_method, url: endpoint,
+      method: http_method, url: endpoint(resourse_id),
       payload: payload, headers: headers,
       user: username, password: password
     )
@@ -25,6 +25,10 @@ class Operation
 
   def payload
     options.fetch(:payload, {}).to_json
+  end
+
+  def resourse_id
+    JSON.parse(payload).delete('id')
   end
 
   def config
