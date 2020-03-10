@@ -1,6 +1,5 @@
 # Pedals
-
-Ruby interface to Pedals Delivery API.
+Ruby wrapper for Pedals Delivery API
 
 ## Installation
 

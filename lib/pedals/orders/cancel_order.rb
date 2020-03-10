@@ -3,6 +3,7 @@
 module Pedals
   module Orders
     class CancelOrder < Operation
+      CANCEL_STATE = 'cancelled'
       def http_method
         :put
       end
@@ -13,11 +14,7 @@ module Pedals
 
       def payload
         payload = options.fetch(:payload, {})
-        payload.merge(status: 'cancelled').to_json unless payload.empty?
-      end
-
-      def resource_id
-        JSON.parse(payload).delete('id')
+        payload.merge(status: CANCEL_STATE).to_json unless payload.empty?
       end
     end
   end
