@@ -1,8 +1,6 @@
 # Pedals
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/pedals`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Ruby interface to Pedals Delivery API.
 
 ## Installation
 
@@ -59,7 +57,10 @@ Pedals::Quote::CreateQuote.new(payload: {
   "latestDeliveryTime": "2016-06-12T12:00:00Z"
 })
 ```
-The call to above operation will return the JSON response containg the following fields.
+The call to above operation will return response object with two public methods.
+
+``body`` - JSON data, containing the following fields
+
 ``` ruby
 {
   "id": 1234,
@@ -88,6 +89,7 @@ The call to above operation will return the JSON response containg the following
   "expiresOn": "2016-06-12T15:00:00Z"
 }
 ```
+``code`` - Status code e.g ``201``
 
 Pedals API endpoint: https://test.pedals-delivery.com/api/v1/quotes
 
@@ -107,7 +109,10 @@ Pedals::Orders::CreateOrder.new(payload: {
   "specialInstructions": "Package weight fluctuates"
 })
 ```
-The call to above operation will return JSON response containg the following fields.
+The call to above operation will return response object with two public methods.
+
+``body`` - JSON data, containing the following fields
+
 ``` ruby
 {
   "id": order_id,
@@ -137,6 +142,8 @@ The call to above operation will return JSON response containg the following fie
   "price": 770
 }
 ```
+``code`` - Status code e.g ``201``
+
 Pedals API endpoint: https://test.pedals-delivery.com/api/v1/orders
 
 #### Show Order
@@ -145,7 +152,10 @@ Pedals API endpoint: https://test.pedals-delivery.com/api/v1/orders
 Pedals::Orders::ShowOrder.new(payload: {id: order_id})
 ```
 
-The call to above operation will return JSON response containg the following fields.
+The call to above operation will return response object with two public methods.
+
+``body`` - JSON data, containing the following fields
+
 ``` ruby
 {
   "id": order_id,
@@ -178,14 +188,18 @@ The call to above operation will return JSON response containg the following fie
   "price": 770
 }
 ```
+``code`` - Status code e.g ``200``
+
 Pedals API endpoint: https://test.pedals-delivery.com/api/v1/orders/{order_id}
 
 #### Cancel Order
 
 ``` ruby
-Pedals::Orders::CancelOrder.new(payload: {"id": order_id, "status": "cancelled"})
+Pedals::Orders::CancelOrder.new(payload: {"id": order_id})
 ```
-The call to above operation will return JSON response containg the following fields.
+The call to above operation will return response object with two public methods.
+
+``body`` - JSON data, containing the following fields
 
 ``` ruby
 {
@@ -194,6 +208,7 @@ The call to above operation will return JSON response containg the following fie
   "refundAmount": order_refund_amount
 }
 ```
+``code`` - Status code e.g ``200``
 Pedals API endpoint: https://test.pedals-delivery.com/api/v1/orders/{order_id}
 
 ## Contributing
