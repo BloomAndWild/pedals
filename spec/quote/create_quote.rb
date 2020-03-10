@@ -34,56 +34,47 @@ describe Pedals::Quote::CreateQuote do
           ).execute
           expect(response.code).to eq(201)
           expect(JSON.parse(response.body)['id']).not_to be_nil
-          expect(JSON.parse(response.body)['id']).to eq(13_469)
+          expect(JSON.parse(response.body)['id']).to eq(13_829)
         end
       end
     end
     context 'with invalid payload' do
       context 'When pickup location is empty' do
-        it 'returns error message' do
+        it 'raises an exception' do
           payload[:pickup] = {}
           VCR.use_cassette('create_quote_request_with_invalid_payload') do
-            response = described_class.new(
-              payload: payload
-            ).execute
-            expect(response.code).to eq(422)
-            expect(JSON.parse(response)['message']).to eq("Sorry, we couldn't find a route from the pick-up to the drop-off")
+            expect do
+              described_class.new(payload: payload).execute
+            end.to raise_exception(Pedals::Errors::ResponseError, "Sorry, we couldn't find a route from the pick-up to the drop-off")
           end
         end
       end
       context 'When dropoff location is empty' do
-        it 'returns error message' do
+        it 'raises an exception' do
           payload[:dropoff] = {}
-          VCR.use_cassette('create_quote_request_with_invalid_payload') do
-            response = described_class.new(
-              payload: payload
-            ).execute
-            expect(response.code).to eq(422)
-            expect(JSON.parse(response)['message']).to eq("Sorry, we couldn't find a route from the pick-up to the drop-off")
+          VCR.use_cassette('create_quote_request_with_empty_dropoff_payload') do
+            expect do
+              described_class.new(payload: payload).execute
+            end.to raise_exception(Pedals::Errors::ResponseError, "Sorry, we couldn't find a route from the pick-up to the drop-off")
           end
         end
       end
       context 'When earliestDeliveryTime or latestDeliveryTime are empty' do
-        it 'returns error message for earliestDeliveryTime ' do
+        it 'raises and exception' do
           payload[:earliestDeliveryTime] = {}
           VCR.use_cassette('create_quote_request_with_empty_earliestDeliveryTime_payload') do
-            response = described_class.new(
-              payload: payload
-            ).execute
-            expect(response.code).to eq(422)
-            expect(JSON.parse(response)['field']).to eq('earliestDeliveryTime')
-            expect(JSON.parse(response)['message']).to eq('We need to know the earliest time the package can be delivered.')
+            expect do
+              described_class.new(payload: payload).execute
+            end.to raise_exception(Pedals::Errors::ResponseError, 'We need to know the earliest time the package can be delivered.')
           end
         end
 
-        it 'returns error message for earliestDeliveryTime ' do
+        it 'raises and exception' do
           payload[:latestDeliveryTime] = {}
           VCR.use_cassette('create_quote_request_with_empty_latestDeliveryTime_payload') do
-            response = described_class.new(
-              payload: payload
-            ).execute
-            expect(response.code).to eq(422)
-            expect(JSON.parse(response)['message']).to eq('We need to know the latest time the package can be delivered.')
+            expect do
+              described_class.new(payload: payload).execute
+            end.to raise_exception(Pedals::Errors::ResponseError, 'We need to know the latest time the package can be delivered.')
           end
         end
       end

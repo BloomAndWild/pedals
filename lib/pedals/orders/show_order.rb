@@ -7,8 +7,8 @@ module Pedals
         :get
       end
 
-      def endpoint(id = nil)
-        "#{base_url}/api/v1/orders/#{id}"
+      def endpoint
+        "#{base_url}/api/v1/orders/#{resource_id}"
       end
     end
   end

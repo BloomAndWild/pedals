@@ -7,8 +7,17 @@ module Pedals
         :put
       end
 
-      def endpoint(id = nil)
-        "#{base_url}/api/v1/orders/#{id}"
+      def endpoint
+        "#{base_url}/api/v1/orders/#{resource_id}"
+      end
+
+      def payload
+        payload = options.fetch(:payload, {})
+        payload.merge(status: 'cancelled').to_json unless payload.empty?
+      end
+
+      def resource_id
+        JSON.parse(payload).delete('id')
       end
     end
   end

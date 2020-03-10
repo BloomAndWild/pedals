@@ -9,8 +9,7 @@ describe Pedals::Orders::CancelOrder do
     let(:config) { Pedals::Client.config }
     let(:payload) do
       {
-        "id": 592,
-        "status": 'cancelled'
+        "id": 604
       }
     end
     context 'with valid payload' do
@@ -22,48 +21,18 @@ describe Pedals::Orders::CancelOrder do
           expect(response.code).to eq(200)
           expect(JSON.parse(response.body)['status']).to eq('cancelled')
           expect(JSON.parse(response.body)['refundAmount']).to eq(1006)
-          expect(JSON.parse(response.body)['id']).to eq(592)
+          expect(JSON.parse(response.body)['id']).to eq(604)
         end
       end
     end
 
     context 'when order is already cancelled' do
-      it 'return info message' do
+      it 'raises an exception' do
         VCR.use_cassette('already_cancelled_order_request') do
-          response = described_class.new(
-            payload: payload
-          ).execute
-          expect(response.code).to eq(422)
-          expect(JSON.parse(response.body)['message']).to eq('This order is already cancelled')
-        end
-      end
-    end
-    context 'with invalid payload' do
-      context 'When status is empty' do
-        it 'returns error message' do
-          payload[:status] = ''
-          VCR.use_cassette('create_order_request_with_empty_status_payload') do
-            response = described_class.new(
-              payload: payload
-            ).execute
-            expect(response.code).to eq(422)
-            expect(JSON.parse(response)['field']).to eq('status')
-            expect(JSON.parse(response)['message']).to eq('Property [status] of class [class pedals.OrderCancel] cannot be null')
-          end
-        end
-      end
-
-      context 'When invalid status is provided for cancel order' do
-        it 'returns error message' do
-          payload[:status] = 'active'
-          VCR.use_cassette('cancel_order_request_with_invalid_status_payload') do
-            response = described_class.new(
-              payload: payload
-            ).execute
-            expect(response.code).to eq(422)
-            expect(JSON.parse(response)['field']).to eq('status')
-            expect(JSON.parse(response)['message']).to eq('Property [status] of class [class pedals.OrderCancel] with value [active] is not contained within the list [[cancelled]]')
-          end
+          expect do
+            described_class.new(payload: payload).execute
+          end.to raise_exception(Pedals::Errors::ResponseError,
+                                 'This order is already cancelled')
         end
       end
     end

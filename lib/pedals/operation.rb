@@ -6,15 +6,14 @@ class Operation
   end
 
   def execute
-    # For basic auth we're providing
-    # user & password param to Rest-Client Request object.
-    RestClient::Request.execute(
-      method: http_method, url: endpoint(resourse_id),
-      payload: payload, headers: headers,
-      user: username, password: password
-    )
-  rescue RestClient::ExceptionWithResponse => e
-    e.response
+    conn = Faraday.new
+    conn.basic_auth username, password
+    response = conn.run_request(http_method, endpoint, payload, headers)
+    unless response.success?
+      raise Pedals::Errors::ResponseError,
+            parsed_response(response.body).dig('message')
+    end
+    OpenStruct.new(body: response.body, code: response.status)
   end
 
   def headers
@@ -27,7 +26,7 @@ class Operation
     options.fetch(:payload, {}).to_json
   end
 
-  def resourse_id
+  def resource_id
     JSON.parse(payload).delete('id')
   end
 

@@ -17,6 +17,13 @@ VCR.configure do |c|
   c.cassette_library_dir                    = 'spec/support/fixtures/vcr_cassettes'
   c.allow_http_connections_when_no_cassette = true
   c.default_cassette_options                = { match_requests_on: [:uri] }
+  # Filtering Basic auth credentials from VCR interaction.
+  c.filter_sensitive_data('<BASIC_AUTH_CREDENTIALS>') do |interaction|
+    auths = interaction.request.headers['Authorization'].first
+    if (match = auths.match /^Basic\s+([^,\s]+)/)
+      match.captures.first
+    end
+  end
 end
 
 RSpec.configure do |config|

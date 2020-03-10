@@ -5,23 +5,19 @@ http_interactions:
     uri: https://test.pedals-delivery.com/api/v1/orders
     body:
       encoding: UTF-8
-      string: '{"quote":13509,"senderName":"Gandalf","senderContact":"07700900776","receiverName":"Elrond","receiverContact":"","description":"The
+      string: '{"quote":13846,"senderName":"Gandalf","senderContact":"07700900776","receiverName":"Elrond","receiverContact":"","description":"The
         One Ring","specialInstructions":"Package weight fluctuates"}'
     headers:
-      Accept:
-      - "*/*"
       User-Agent:
-      - rest-client/2.1.0 (darwin18.6.0 x86_64) ruby/2.6.3p62
+      - Faraday v0.17.3
+      Authorization:
+      - Basic <BASIC_AUTH_CREDENTIALS>
       Content-Type:
       - application/json
-      Content-Length:
-      - '192'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Host:
-      - test.pedals-delivery.com
-      Authorization:
-      - Basic <CREDENTIALS>
+      Accept:
+      - "*/*"
   response:
     status:
       code: 422
@@ -32,7 +28,7 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Date:
-      - Sun, 08 Mar 2020 20:14:02 GMT
+      - Tue, 10 Mar 2020 09:03:58 GMT
       Server:
       - Apache/2.4.41 (Amazon) OpenSSL/1.0.2k-fips
       X-Application-Context:
@@ -46,5 +42,5 @@ http_interactions:
       string: '{"field":"receiverContact","message":"The phone number of the person
         receiving the package (receiverContact) is required"}'
     http_version:
-  recorded_at: Sun, 08 Mar 2020 20:14:02 GMT
+  recorded_at: Tue, 10 Mar 2020 09:03:58 GMT
 recorded_with: VCR 3.0.3
