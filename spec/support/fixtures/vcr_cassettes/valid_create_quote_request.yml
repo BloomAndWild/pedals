@@ -28,7 +28,7 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Date:
-      - Mon, 09 Mar 2020 16:34:19 GMT
+      - Tue, 10 Mar 2020 13:43:24 GMT
       Server:
       - Apache/2.4.41 (Amazon) OpenSSL/1.0.2k-fips
       X-Application-Context:
@@ -39,10 +39,10 @@ http_interactions:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '{"customer":16,"dateCreated":"2020-03-09T16:34:19Z","distanceInMetres":1781,"dropoff":{"address":"The
+      string: '{"customer":16,"dateCreated":"2020-03-10T13:43:24Z","distanceInMetres":1781,"dropoff":{"address":"The
         British Museum","postcode":"WC1B 3DG","lat":51.519362000000000000,"lng":-0.126873000000000000},"drops":[{"address":"The
-        British Museum","postcode":"WC1B 3DG","lat":51.519362000000000000,"lng":-0.126873000000000000}],"duration":366,"earliestDeliveryTime":"2020-03-09T09:00:00Z","expiresOn":"2020-03-10T00:00:00Z","id":13829,"latestDeliveryTime":"2020-03-09T18:00:00Z","pickup":{"address":"110
+        British Museum","postcode":"WC1B 3DG","lat":51.519362000000000000,"lng":-0.126873000000000000}],"duration":366,"earliestDeliveryTime":"2020-03-10T09:00:00Z","expiresOn":"2020-03-11T00:00:00Z","id":14097,"latestDeliveryTime":"2020-03-10T18:00:00Z","pickup":{"address":"110
         Hampstead Road","postcode":"NW1 2LS","lat":51.528275000000000000,"lng":-0.138243000000000000},"price":1006,"timing":"flexible"}'
     http_version:
-  recorded_at: Mon, 09 Mar 2020 16:34:19 GMT
+  recorded_at: Tue, 10 Mar 2020 13:43:24 GMT
 recorded_with: VCR 3.0.3

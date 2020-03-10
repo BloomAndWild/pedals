@@ -9,7 +9,7 @@ describe Pedals::Orders::CreateOrder do
     let(:config) { Pedals::Client.config }
     let(:payload) do
       {
-        "quote": 13_846,
+        "quote": 14_097,
         "senderName": 'Gandalf',
         "senderContact": '07700900776',
         "receiverName": 'Elrond',
@@ -25,10 +25,10 @@ describe Pedals::Orders::CreateOrder do
             payload: payload
           ).execute
           expect(response.code).to eq(201)
-          expect(JSON.parse(response.body)['status']).to eq('available')
-          expect(JSON.parse(response.body)['senderName']).to eq('Gandalf')
-          expect(JSON.parse(response.body)['receiverName']).to eq('Elrond')
-          expect(JSON.parse(response.body)['id']).not_to be_nil
+          expect(response.body[:status]).to eq('available')
+          expect(response.body[:senderName]).to eq('Gandalf')
+          expect(response.body[:receiverName]).to eq('Elrond')
+          expect(response.body[:id]).not_to be_nil
         end
       end
     end

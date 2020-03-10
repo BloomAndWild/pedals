@@ -19,9 +19,9 @@ describe Pedals::Orders::CancelOrder do
             payload: payload
           ).execute
           expect(response.code).to eq(200)
-          expect(JSON.parse(response.body)['status']).to eq('cancelled')
-          expect(JSON.parse(response.body)['refundAmount']).to eq(1006)
-          expect(JSON.parse(response.body)['id']).to eq(604)
+          expect(response.body[:status]).to eq('cancelled')
+          expect(response.body[:refundAmount]).to eq(1006)
+          expect(response.body[:id]).to eq(604)
         end
       end
     end

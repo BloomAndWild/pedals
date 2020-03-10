@@ -8,12 +8,14 @@ class Operation
   def execute
     conn = Faraday.new
     conn.basic_auth username, password
-    response = conn.run_request(http_method, endpoint, payload, headers)
+    response = conn.run_request(http_method, endpoint, payload.to_json, headers)
     unless response.success?
       raise Pedals::Errors::ResponseError,
-            parsed_response(response.body).dig('message')
+            parsed_response(response.body).dig(:message)
     end
-    OpenStruct.new(body: response.body, code: response.status)
+    status = response.status
+    body = parsed_response(response.body)
+    OpenStruct.new(body: body, code: status)
   end
 
   def headers
@@ -23,22 +25,22 @@ class Operation
   end
 
   def payload
-    options.fetch(:payload, {}).to_json
+    options.fetch(:payload, {})
   end
 
   def resource_id
-    JSON.parse(payload).delete('id')
+    payload.delete(:id)
   end
 
   def config
     Pedals::Client.config
   end
 
-  def parsed_response(response)
-    JSON.parse(response)
-  end
-
   private
+
+  def parsed_response(response)
+    JSON.parse(response, symbolize_names: true)
+  end
 
   attr_reader :options
 

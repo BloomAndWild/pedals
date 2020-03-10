@@ -33,8 +33,8 @@ describe Pedals::Quote::CreateQuote do
             payload: payload
           ).execute
           expect(response.code).to eq(201)
-          expect(JSON.parse(response.body)['id']).not_to be_nil
-          expect(JSON.parse(response.body)['id']).to eq(13_829)
+          expect(response.body[:id]).not_to be_nil
+          expect(response.body[:id]).to eq(14_097)
         end
       end
     end
