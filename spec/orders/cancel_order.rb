@@ -12,6 +12,7 @@ describe Pedals::Orders::CancelOrder do
         "id": 604
       }
     end
+
     context 'with valid payload' do
       it 'returns valid response' do
         VCR.use_cassette('valid_cancel_order_request') do

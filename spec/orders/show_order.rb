@@ -12,6 +12,7 @@ describe Pedals::Orders::ShowOrder do
         "id": 604
       }
     end
+
     # Order show endpoint returns order does not exist for given order id.
     # However the test order is created before.
     # i assume it return this message for test order and return with actual data on live.

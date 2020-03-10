@@ -18,6 +18,7 @@ describe Pedals::Orders::CreateOrder do
         "specialInstructions": 'Package weight fluctuates'
       }
     end
+
     context 'with valid payload' do
       it 'returns valid response' do
         VCR.use_cassette('valid_create_order_request') do
@@ -32,7 +33,9 @@ describe Pedals::Orders::CreateOrder do
         end
       end
     end
+
     context 'with invalid payload' do
+
       context 'When senderName is empty' do
         it 'raises an exception' do
           payload[:senderName] = ''
@@ -44,6 +47,7 @@ describe Pedals::Orders::CreateOrder do
           end
         end
       end
+
       context 'When receiverName is empty' do
         it 'raises an exception' do
           payload[:receiverName] = ''
@@ -55,6 +59,7 @@ describe Pedals::Orders::CreateOrder do
           end
         end
       end
+
       context 'When receiverContact & description is empty' do
         it 'raises an exception' do
           payload[:receiverContact] = ''
