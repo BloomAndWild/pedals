@@ -9,13 +9,13 @@ describe Pedals::Orders::CreateOrder do
     let(:config) { Pedals::Client.config }
     let(:payload) do
       {
-        "quote": 14_097,
-        "senderName": 'Gandalf',
-        "senderContact": '07700900776',
-        "receiverName": 'Elrond',
-        "receiverContact": '02079460683',
-        "description": 'The One Ring',
-        "specialInstructions": 'Package weight fluctuates'
+        quote: 14_097,
+        senderName: 'Gandalf',
+        senderContact: '07700900776',
+        receiverName: 'Elrond',
+        receiverContact: '02079460683',
+        description: 'The One Ring',
+        specialInstructions: 'Package weight fluctuates'
       }
     end
 

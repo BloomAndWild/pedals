@@ -9,7 +9,7 @@ describe Pedals::Orders::CancelOrder do
     let(:config) { Pedals::Client.config }
     let(:payload) do
       {
-        "id": 604
+        id: 604
       }
     end
 

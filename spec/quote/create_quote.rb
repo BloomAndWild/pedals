@@ -9,21 +9,21 @@ describe Pedals::Quote::CreateQuote do
     let(:config) { Pedals::Client.config }
     let(:payload) do
       {
-        "pickup": {
-          "address": '110 Hampstead Road',
-          "postcode": 'NW1 2LS',
-          "lat": 51.5284878,
-          "lng": -0.1290927
+        pickup: {
+          address: '110 Hampstead Road',
+          postcode: 'NW1 2LS',
+          lat: 51.5284878,
+          lng: -0.1290927
         },
-        "dropoff": {
-          "address": 'The British Museum',
-          "postcode": 'WC1B 3DG',
-          "lat": 51.5191683,
-          "lng": -0.1290927
+        dropoff: {
+          address: 'The British Museum',
+          postcode: 'WC1B 3DG',
+          lat: 51.5191683,
+          lng: -0.1290927
         },
-        "timing": 'flexible',
-        "earliestDeliveryTime": '2016-06-12T11:00:00Z',
-        "latestDeliveryTime": '2016-06-12T12:00:00Z'
+        timing: 'flexible',
+        earliestDeliveryTime: '2016-06-12T11:00:00Z',
+        latestDeliveryTime: '2016-06-12T12:00:00Z'
       }
     end
 
