@@ -14,7 +14,7 @@ module Pedals
 
       def payload
         payload = options.fetch(:payload, {})
-        payload.merge(status: CANCEL_STATE) unless payload.empty?
+        payload.merge(status: CANCEL_STATE)
       end
     end
   end
