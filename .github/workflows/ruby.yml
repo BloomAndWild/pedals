@@ -17,4 +17,5 @@ jobs:
       run: |
         gem install bundler
         bundle install --retry 3
+        cp .env.sample .env
         bundle exec rake
