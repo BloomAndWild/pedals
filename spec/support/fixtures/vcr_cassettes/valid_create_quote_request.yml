@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://test.pedals-delivery.com/api/v1/quotes
+    body:
+      encoding: UTF-8
+      string: '{"pickup":{"address":"110 Hampstead Road","postcode":"NW1 2LS","lat":51.5284878,"lng":-0.1290927},"dropoff":{"address":"The
+        British Museum","postcode":"WC1B 3DG","lat":51.5191683,"lng":-0.1290927},"timing":"flexible","earliestDeliveryTime":"2016-06-12T11:00:00Z","latestDeliveryTime":"2016-06-12T12:00:00Z"}'
+    headers:
+      User-Agent:
+      - Faraday v0.17.3
+      Authorization:
+      - Basic <BASIC_AUTH_CREDENTIALS>
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 201
+      message: ''
+    headers:
+      Cache-Control:
+      - no-cache="set-cookie"
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Tue, 10 Mar 2020 13:43:24 GMT
+      Server:
+      - Apache/2.4.41 (Amazon) OpenSSL/1.0.2k-fips
+      X-Application-Context:
+      - application:production
+      Content-Length:
+      - '621'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"customer":16,"dateCreated":"2020-03-10T13:43:24Z","distanceInMetres":1781,"dropoff":{"address":"The
+        British Museum","postcode":"WC1B 3DG","lat":51.519362000000000000,"lng":-0.126873000000000000},"drops":[{"address":"The
+        British Museum","postcode":"WC1B 3DG","lat":51.519362000000000000,"lng":-0.126873000000000000}],"duration":366,"earliestDeliveryTime":"2020-03-10T09:00:00Z","expiresOn":"2020-03-11T00:00:00Z","id":14097,"latestDeliveryTime":"2020-03-10T18:00:00Z","pickup":{"address":"110
+        Hampstead Road","postcode":"NW1 2LS","lat":51.528275000000000000,"lng":-0.138243000000000000},"price":1006,"timing":"flexible"}'
+    http_version:
+  recorded_at: Tue, 10 Mar 2020 13:43:24 GMT
+recorded_with: VCR 3.0.3
