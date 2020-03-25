@@ -3,8 +3,16 @@
 module Pedals
   module Errors
     class ResponseError < StandardError
-      def initialize(message)
-        super(message)
+      def initialize(response)
+        @response = response
+      end
+
+      def status
+        @response.status
+      end
+
+      def body
+        @response.body
       end
     end
   end

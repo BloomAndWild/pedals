@@ -12,3 +12,5 @@
 
 # rspec failure tracking
 .rspec_status
+
+.idea/ # Rubymine adds stuff here

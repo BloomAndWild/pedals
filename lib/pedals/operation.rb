@@ -10,8 +10,7 @@ class Operation
     conn.basic_auth username, password
     response = conn.run_request(http_method, endpoint, payload.to_json, headers)
     unless response.success?
-      raise Pedals::Errors::ResponseError,
-            parsed_response(response.body).dig(:message)
+      raise Pedals::Errors::ResponseError.new(response)
     end
     status = response.status
     body = parsed_response(response.body)

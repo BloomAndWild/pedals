@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://test.pedals-delivery.com/api/v1/orders/673
+    uri: https://test.pedals-delivery.com/api/v1/orders/604
     body:
       encoding: UTF-8
       string: "{}"
@@ -27,15 +27,15 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Date:
-      - Thu, 26 Mar 2020 11:18:16 GMT
+      - Thu, 26 Mar 2020 09:22:24 GMT
       Server:
       - Apache/2.4.41 (Amazon) OpenSSL/1.0.2k-fips
       Set-Cookie:
       - AWSELB=036F657F0634187E8AEE2B6D439EB9207ABAAFB7D1AFD302B66A81D620643CF9055DEFBDA0BAC67EFE33EC51B67FE94AECA64B5B3BE281CED4D1289A3CF0F1CB4C98CCBD3F;PATH=/;MAX-AGE=600
       - AWSELBCORS=036F657F0634187E8AEE2B6D439EB9207ABAAFB7D1AFD302B66A81D620643CF9055DEFBDA0BAC67EFE33EC51B67FE94AECA64B5B3BE281CED4D1289A3CF0F1CB4C98CCBD3F;PATH=/;MAX-AGE=600;SECURE;SAMESITE=None
-      - JSESSIONID=D21931465AAB2260A0E7B9D9C978D203; Path=/; Secure; HttpOnly
-      - grails_remember_me=ZXVyMWRpTmhFMk40NTJMUkFNTmNDZz09OlNHM2ZGUkE4T3lBM1hma05JTm9ZeHc9PQ;
-        Max-Age=1209600; Expires=Thu, 09-Apr-2020 11:18:16 GMT; Path=/; Secure; HttpOnly
+      - JSESSIONID=3360EEEFD2B75CE9003DBFE26ED0611C; Path=/; Secure; HttpOnly
+      - grails_remember_me=ZDBFdHhPemVqcGo3RFlpV0hDdjNLZz09OlBjU3FPNUFwR0hBKy9uM1VLWmZjWVE9PQ;
+        Max-Age=1209600; Expires=Thu, 09-Apr-2020 09:22:24 GMT; Path=/; Secure; HttpOnly
       X-Application-Context:
       - application:production
       Content-Length:
@@ -46,5 +46,5 @@ http_interactions:
       encoding: UTF-8
       string: '{"field":null,"message":"This order does not exist"}'
     http_version: 
-  recorded_at: Thu, 26 Mar 2020 11:18:16 GMT
+  recorded_at: Thu, 26 Mar 2020 09:22:24 GMT
 recorded_with: VCR 3.0.3

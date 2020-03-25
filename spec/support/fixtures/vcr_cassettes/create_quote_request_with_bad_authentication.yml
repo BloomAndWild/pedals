@@ -1,11 +1,12 @@
 ---
 http_interactions:
 - request:
-    method: get
-    uri: https://test.pedals-delivery.com/api/v1/orders/673
+    method: post
+    uri: https://test.pedals-delivery.com/api/v1/quotes
     body:
       encoding: UTF-8
-      string: "{}"
+      string: '{"pickup":{},"dropoff":{"address":"The British Museum","postcode":"WC1B
+        3DG","lat":51.5191683,"lng":-0.1290927},"timing":"flexible","earliestDeliveryTime":"2016-06-12T11:00:00Z","latestDeliveryTime":"2016-06-12T12:00:00Z"}'
     headers:
       User-Agent:
       - Faraday v1.0.0
@@ -19,7 +20,7 @@ http_interactions:
       - "*/*"
   response:
     status:
-      code: 404
+      code: 401
       message: ''
     headers:
       Cache-Control:
@@ -27,24 +28,23 @@ http_interactions:
       Content-Type:
       - application/json;charset=UTF-8
       Date:
-      - Thu, 26 Mar 2020 11:18:16 GMT
+      - Wed, 25 Mar 2020 16:53:04 GMT
       Server:
       - Apache/2.4.41 (Amazon) OpenSSL/1.0.2k-fips
       Set-Cookie:
       - AWSELB=036F657F0634187E8AEE2B6D439EB9207ABAAFB7D1AFD302B66A81D620643CF9055DEFBDA0BAC67EFE33EC51B67FE94AECA64B5B3BE281CED4D1289A3CF0F1CB4C98CCBD3F;PATH=/;MAX-AGE=600
       - AWSELBCORS=036F657F0634187E8AEE2B6D439EB9207ABAAFB7D1AFD302B66A81D620643CF9055DEFBDA0BAC67EFE33EC51B67FE94AECA64B5B3BE281CED4D1289A3CF0F1CB4C98CCBD3F;PATH=/;MAX-AGE=600;SECURE;SAMESITE=None
-      - JSESSIONID=D21931465AAB2260A0E7B9D9C978D203; Path=/; Secure; HttpOnly
-      - grails_remember_me=ZXVyMWRpTmhFMk40NTJMUkFNTmNDZz09OlNHM2ZGUkE4T3lBM1hma05JTm9ZeHc9PQ;
-        Max-Age=1209600; Expires=Thu, 09-Apr-2020 11:18:16 GMT; Path=/; Secure; HttpOnly
-      X-Application-Context:
-      - application:production
+      - grails_remember_me=; Max-Age=0; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      Www-Authenticate:
+      - Basic realm="Grails Realm"
       Content-Length:
-      - '52'
+      - '115'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '{"field":null,"message":"This order does not exist"}'
+      string: '{"timestamp":1585155184763,"status":401,"error":"Unauthorized","message":"Bad
+        credentials","path":"/api/v1/quotes"}'
     http_version: 
-  recorded_at: Thu, 26 Mar 2020 11:18:16 GMT
+  recorded_at: Wed, 25 Mar 2020 16:53:04 GMT
 recorded_with: VCR 3.0.3

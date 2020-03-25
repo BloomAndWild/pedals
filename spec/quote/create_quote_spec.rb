@@ -34,52 +34,77 @@ describe Pedals::Quote::CreateQuote do
             payload: payload
           ).execute
           expect(response.code).to eq(201)
-          expect(response.body[:id]).not_to be_nil
           expect(response.body[:id]).to eq(14_097)
         end
       end
     end
 
     context 'with invalid payload' do
-      context 'When pickup location is empty' do
+      context 'When pickup or drop off locations are empty' do
+        let(:error_response) do
+          "{\"field\":null,\"message\":\"Sorry, we couldn't find a route from the pick-up to the drop-off\"}"
+        end
+
         it 'raises an exception' do
           payload[:pickup] = {}
-          VCR.use_cassette('create_quote_request_with_invalid_payload') do
-            expect do
+          expect do
+            # check this vcr as the response is 401 unauthorised. add an extra spec for that case
+            VCR.use_cassette('create_quote_request_with_empty_pickup_payload') do
               described_class.new(payload: payload).execute
-            end.to raise_exception(Pedals::Errors::ResponseError, "Sorry, we couldn't find a route from the pick-up to the drop-off")
-          end
+            rescue Pedals::Errors::ResponseError => e
+              expect(e.status).to eq 422
+              expect(e.body).to eq error_response
+              raise e
+            end
+          end.to raise_exception(Pedals::Errors::ResponseError)
         end
-      end
 
-      context 'When dropoff location is empty' do
         it 'raises an exception' do
           payload[:dropoff] = {}
-          VCR.use_cassette('create_quote_request_with_empty_dropoff_payload') do
-            expect do
+          expect do
+            VCR.use_cassette('create_quote_request_with_empty_dropoff_payload') do
               described_class.new(payload: payload).execute
-            end.to raise_exception(Pedals::Errors::ResponseError, "Sorry, we couldn't find a route from the pick-up to the drop-off")
-          end
+            rescue Pedals::Errors::ResponseError => e
+              expect(e.status).to eq 422
+              expect(e.body).to eq error_response
+              raise e
+            end
+          end.to raise_exception(Pedals::Errors::ResponseError)
         end
       end
 
       context 'When earliestDeliveryTime or latestDeliveryTime are empty' do
+        let(:earliest_error_response) do
+          "{\"field\":\"earliestDeliveryTime\",\"message\":\"We need to know the earliest time the package can be delivered.\"}"
+        end
+        let(:latest_error_response) do
+          "{\"field\":\"earliestDeliveryTime\",\"message\":\"We need to know the latest time the package can be delivered.\"}"
+        end
+
         it 'raises and exception' do
           payload[:earliestDeliveryTime] = {}
-          VCR.use_cassette('create_quote_request_with_empty_earliestDeliveryTime_payload') do
-            expect do
+          expect do
+            VCR.use_cassette('create_quote_request_with_empty_earliestDeliveryTime_payload') do
               described_class.new(payload: payload).execute
-            end.to raise_exception(Pedals::Errors::ResponseError, 'We need to know the earliest time the package can be delivered.')
-          end
+            rescue Pedals::Errors::ResponseError => e
+              expect(e.status).to eq 422
+              expect(e.body).to eq earliest_error_response
+              raise e
+            end
+          end.to raise_exception(Pedals::Errors::ResponseError)
         end
 
         it 'raises and exception' do
           payload[:latestDeliveryTime] = {}
-          VCR.use_cassette('create_quote_request_with_empty_latestDeliveryTime_payload') do
-            expect do
+          expect do
+            VCR.use_cassette('create_quote_request_with_empty_latestDeliveryTime_payload') do
               described_class.new(payload: payload).execute
-            end.to raise_exception(Pedals::Errors::ResponseError, 'We need to know the latest time the package can be delivered.')
-          end
+            rescue Pedals::Errors::ResponseError => e
+              expect(e.status).to eq 422
+              expect(e.body).to eq latest_error_response
+              raise e
+            end
+          end.to raise_exception(Pedals::Errors::ResponseError)
         end
       end
     end

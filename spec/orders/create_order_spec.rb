@@ -35,49 +35,79 @@ describe Pedals::Orders::CreateOrder do
     end
 
     context 'with invalid payload' do
-
       context 'When senderName is empty' do
+        let(:error_response) do
+          "{\"field\":\"senderName\",\"message\":\"The name of the person sending the package (senderName) is required\"}"
+        end
+
         it 'raises an exception' do
           payload[:senderName] = ''
-          VCR.use_cassette('create_order_request_with_empty_sender_name_payload') do
-            expect do
+          expect do
+            VCR.use_cassette('create_order_request_with_empty_sender_name_payload') do
               described_class.new(payload: payload).execute
-            end.to raise_exception(Pedals::Errors::ResponseError,
-                                   'The name of the person sending the package (senderName) is required')
-          end
+            rescue Pedals::Errors::ResponseError => e
+              expect(e.status).to eq 422
+              expect(e.body).to eq error_response
+              raise e
+            end
+          end.to raise_exception(Pedals::Errors::ResponseError)
         end
       end
 
       context 'When receiverName is empty' do
+        let(:error_response) do
+          "{\"field\":\"receiverName\",\"message\":\"The name of the person receiving the package (receiverName) is required\"}"
+        end
+
         it 'raises an exception' do
           payload[:receiverName] = ''
-          VCR.use_cassette('create_order_request_with_empty_receiver_name_payload') do
-            expect do
+          expect do
+            VCR.use_cassette('create_order_request_with_empty_receiver_name_payload') do
               described_class.new(payload: payload).execute
-            end.to raise_exception(Pedals::Errors::ResponseError,
-                                   'The name of the person receiving the package (receiverName) is required')
-          end
+            rescue Pedals::Errors::ResponseError => e
+              expect(e.status).to eq 422
+              expect(e.body).to eq error_response
+              raise e
+            end
+          end.to raise_exception(Pedals::Errors::ResponseError)
         end
       end
 
-      context 'When receiverContact & description is empty' do
+      context 'When receiverContact is empty' do
+        let(:error_response) do
+          "{\"field\":\"receiverContact\",\"message\":\"The phone number of the person receiving the package (receiverContact) is required\"}"
+        end
+
         it 'raises an exception' do
           payload[:receiverContact] = ''
-          VCR.use_cassette('create_order_request_with_empty_receiverContact_payload') do
-            expect do
+          expect do
+            VCR.use_cassette('create_order_request_with_empty_receiver_contact_payload') do
               described_class.new(payload: payload).execute
-            end.to raise_exception(Pedals::Errors::ResponseError,
-                                   'The phone number of the person receiving the package (receiverContact) is required')
-          end
+            rescue Pedals::Errors::ResponseError => e
+              expect(e.status).to eq 422
+              expect(e.body).to eq error_response
+              raise e
+            end
+          end.to raise_exception(Pedals::Errors::ResponseError)
+        end
+      end
+
+      context 'When description is empty' do
+        let(:error_response) do
+          "{\"field\":\"description\",\"message\":\"A description of the items being delivered (description) is required\"}"
         end
 
         it 'raises an exception' do
           payload[:description] = ''
-          VCR.use_cassette('create_order_request_with_empty_description_payload') do
-            expect do
+          expect do
+            VCR.use_cassette('create_order_request_with_empty_description_payload') do
               described_class.new(payload: payload).execute
-            end.to raise_exception(Pedals::Errors::ResponseError, 'A description of the items being delivered (description) is required')
-          end
+            rescue Pedals::Errors::ResponseError => e
+              expect(e.status).to eq 422
+              expect(e.body).to eq error_response
+              raise e
+            end
+          end.to raise_exception(Pedals::Errors::ResponseError)
         end
       end
     end
