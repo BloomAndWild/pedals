@@ -41,8 +41,8 @@ describe Pedals::Quote::CreateQuote do
 
     context 'with invalid payload' do
       context 'When pickup or drop off locations are empty' do
-        let(:error_response) do
-          "{\"field\":null,\"message\":\"Sorry, we couldn't find a route from the pick-up to the drop-off\"}"
+        let(:error_response_json) do
+          { "field" => nil, "message" => "Sorry, we couldn't find a route from the pick-up to the drop-off" }
         end
 
         it 'raises an exception' do
@@ -53,7 +53,7 @@ describe Pedals::Quote::CreateQuote do
               described_class.new(payload: payload).execute
             rescue Pedals::Errors::ResponseError => e
               expect(e.status).to eq 422
-              expect(e.body).to eq error_response
+              expect(JSON.parse(e.body)).to eq error_response_json
               raise e
             end
           end.to raise_exception(Pedals::Errors::ResponseError)
@@ -66,7 +66,7 @@ describe Pedals::Quote::CreateQuote do
               described_class.new(payload: payload).execute
             rescue Pedals::Errors::ResponseError => e
               expect(e.status).to eq 422
-              expect(e.body).to eq error_response
+              expect(JSON.parse(e.body)).to eq error_response_json
               raise e
             end
           end.to raise_exception(Pedals::Errors::ResponseError)
@@ -74,11 +74,11 @@ describe Pedals::Quote::CreateQuote do
       end
 
       context 'When earliestDeliveryTime or latestDeliveryTime are empty' do
-        let(:earliest_error_response) do
-          "{\"field\":\"earliestDeliveryTime\",\"message\":\"We need to know the earliest time the package can be delivered.\"}"
+        let(:earliest_error_response_json) do
+          { "field" => "earliestDeliveryTime", "message" => "We need to know the earliest time the package can be delivered." }
         end
-        let(:latest_error_response) do
-          "{\"field\":\"earliestDeliveryTime\",\"message\":\"We need to know the latest time the package can be delivered.\"}"
+        let(:latest_error_response_json) do
+          { "field" => "earliestDeliveryTime", "message" => "We need to know the latest time the package can be delivered." }
         end
 
         it 'raises and exception' do
@@ -88,7 +88,7 @@ describe Pedals::Quote::CreateQuote do
               described_class.new(payload: payload).execute
             rescue Pedals::Errors::ResponseError => e
               expect(e.status).to eq 422
-              expect(e.body).to eq earliest_error_response
+              expect(JSON.parse(e.body)).to eq earliest_error_response_json
               raise e
             end
           end.to raise_exception(Pedals::Errors::ResponseError)
@@ -101,7 +101,7 @@ describe Pedals::Quote::CreateQuote do
               described_class.new(payload: payload).execute
             rescue Pedals::Errors::ResponseError => e
               expect(e.status).to eq 422
-              expect(e.body).to eq latest_error_response
+              expect(JSON.parse(e.body)).to eq latest_error_response_json
               raise e
             end
           end.to raise_exception(Pedals::Errors::ResponseError)

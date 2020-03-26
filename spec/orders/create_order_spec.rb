@@ -36,8 +36,8 @@ describe Pedals::Orders::CreateOrder do
 
     context 'with invalid payload' do
       context 'When senderName is empty' do
-        let(:error_response) do
-          "{\"field\":\"senderName\",\"message\":\"The name of the person sending the package (senderName) is required\"}"
+        let(:error_response_json) do
+          { "field" => "senderName", "message" => "The name of the person sending the package (senderName) is required" }
         end
 
         it 'raises an exception' do
@@ -47,7 +47,7 @@ describe Pedals::Orders::CreateOrder do
               described_class.new(payload: payload).execute
             rescue Pedals::Errors::ResponseError => e
               expect(e.status).to eq 422
-              expect(e.body).to eq error_response
+              expect(JSON.parse(e.body)).to eq error_response_json
               raise e
             end
           end.to raise_exception(Pedals::Errors::ResponseError)
@@ -55,8 +55,8 @@ describe Pedals::Orders::CreateOrder do
       end
 
       context 'When receiverName is empty' do
-        let(:error_response) do
-          "{\"field\":\"receiverName\",\"message\":\"The name of the person receiving the package (receiverName) is required\"}"
+        let(:error_response_json) do
+          { "field" => "receiverName", "message" => "The name of the person receiving the package (receiverName) is required" }
         end
 
         it 'raises an exception' do
@@ -66,7 +66,7 @@ describe Pedals::Orders::CreateOrder do
               described_class.new(payload: payload).execute
             rescue Pedals::Errors::ResponseError => e
               expect(e.status).to eq 422
-              expect(e.body).to eq error_response
+              expect(JSON.parse(e.body)).to eq error_response_json
               raise e
             end
           end.to raise_exception(Pedals::Errors::ResponseError)
@@ -74,8 +74,8 @@ describe Pedals::Orders::CreateOrder do
       end
 
       context 'When receiverContact is empty' do
-        let(:error_response) do
-          "{\"field\":\"receiverContact\",\"message\":\"The phone number of the person receiving the package (receiverContact) is required\"}"
+        let(:error_response_json) do
+          { "field" => "receiverContact", "message" => "The phone number of the person receiving the package (receiverContact) is required" }
         end
 
         it 'raises an exception' do
@@ -85,7 +85,7 @@ describe Pedals::Orders::CreateOrder do
               described_class.new(payload: payload).execute
             rescue Pedals::Errors::ResponseError => e
               expect(e.status).to eq 422
-              expect(e.body).to eq error_response
+              expect(JSON.parse(e.body)).to eq error_response_json
               raise e
             end
           end.to raise_exception(Pedals::Errors::ResponseError)
@@ -93,8 +93,8 @@ describe Pedals::Orders::CreateOrder do
       end
 
       context 'When description is empty' do
-        let(:error_response) do
-          "{\"field\":\"description\",\"message\":\"A description of the items being delivered (description) is required\"}"
+        let(:error_response_json) do
+          { "field" => "description", "message" => "A description of the items being delivered (description) is required" }
         end
 
         it 'raises an exception' do
@@ -104,7 +104,7 @@ describe Pedals::Orders::CreateOrder do
               described_class.new(payload: payload).execute
             rescue Pedals::Errors::ResponseError => e
               expect(e.status).to eq 422
-              expect(e.body).to eq error_response
+              expect(JSON.parse(e.body)).to eq error_response_json
               raise e
             end
           end.to raise_exception(Pedals::Errors::ResponseError)

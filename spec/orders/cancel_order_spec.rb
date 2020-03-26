@@ -28,8 +28,8 @@ describe Pedals::Orders::CancelOrder do
     end
 
     context 'when order is already cancelled' do
-      let(:error_response) do
-        "{\"field\":null,\"message\":\"This order is already cancelled\"}"
+      let(:error_response_json) do
+        { "field" => nil, "message" => "This order is already cancelled" }
       end
 
       it 'raises an exception' do
@@ -38,7 +38,7 @@ describe Pedals::Orders::CancelOrder do
             described_class.new(payload: payload).execute
           rescue Pedals::Errors::ResponseError => e
             expect(e.status).to eq 422
-            expect(e.body).to eq error_response
+            expect(JSON.parse(e.body)).to eq error_response_json
             raise e
           end
         end.to raise_exception(Pedals::Errors::ResponseError)

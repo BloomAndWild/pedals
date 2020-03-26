@@ -39,8 +39,8 @@ describe Pedals::Orders::ShowOrder do
     context 'with invalid payload' do
       let(:payload) { { id: 604 } }
 
-      let(:error_response) do
-        "{\"field\":null,\"message\":\"This order does not exist\"}"
+      let(:error_response_json) do
+        {"field"=>nil, "message"=>"This order does not exist"}
       end
 
       it 'raises an exception if the order does not exist' do
@@ -49,7 +49,7 @@ describe Pedals::Orders::ShowOrder do
             described_class.new(payload: payload).execute
           rescue Pedals::Errors::ResponseError => e
             expect(e.status).to eq 404
-            expect(e.body).to eq error_response
+            expect(JSON.parse(e.body)).to eq error_response_json
             raise e
           end
         end.to raise_exception(Pedals::Errors::ResponseError)
