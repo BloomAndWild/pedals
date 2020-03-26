@@ -3,7 +3,7 @@
 module Pedals
   module Errors
     class ResponseError < StandardError
-      DEFAULT_MESSAGE = "Something went terribly wrong".freeze
+      DEFAULT_MESSAGE = "Response body not in json format.".freeze
 
       def initialize(response)
         @response = response
