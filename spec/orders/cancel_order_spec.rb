@@ -19,6 +19,7 @@ describe Pedals::Orders::CancelOrder do
           response = described_class.new(
             payload: payload
           ).execute
+
           expect(response.code).to eq(200)
           expect(response.body[:status]).to eq('cancelled')
           expect(response.body[:refundAmount]).to eq(1006)

@@ -7,9 +7,9 @@ describe Pedals::Orders::ShowOrder do
       configure_client
     end
     let(:config) { Pedals::Client.config }
-    
+
     context 'list all orders' do
-      let(:payload) { { field: nil} }
+      let(:payload) { { field: nil } }
 
       it 'returns valid response' do
         VCR.use_cassette('list_orders_request') do
@@ -40,7 +40,7 @@ describe Pedals::Orders::ShowOrder do
       let(:payload) { { id: 604 } }
 
       let(:error_response_json) do
-        {"field"=>nil, "message"=>"This order does not exist"}
+        { "field" => nil, "message" => "This order does not exist" }
       end
 
       it 'raises an exception if the order does not exist' do
