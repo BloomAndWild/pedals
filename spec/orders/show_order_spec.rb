@@ -20,24 +20,20 @@ describe Pedals::Orders::ShowOrder do
       end
     end
 
-    # Order show endpoint is not returning a pre-created order for a given id.
-    # However order 673 can be seen in the list all orders repsonse (see vcr 'list_orders_request')
-    # We are contacting Pedal API team for explanation in the meantime this test is pending
-    # TODO: FIXME
     context 'with valid payload' do
       let(:payload) { { id: 673 } }
 
-      xit 'returns valid response' do
+      it 'returns valid response' do
         VCR.use_cassette('show_order_request') do
-          described_class.new(payload: payload).execute
-          expect(response.code).to eq(201)
+          response = described_class.new(payload: payload).execute
+          expect(response.code).to eq(200)
           expect(response.body[:id]).to eq(673)
         end
       end
     end
 
     context 'with invalid payload' do
-      let(:payload) { { id: 604 } }
+      let(:payload) { { id: 6040 } }
 
       let(:error_response_json) do
         { "field" => nil, "message" => "This order does not exist" }
