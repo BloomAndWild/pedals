@@ -1,0 +1,50 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://test.pedals-delivery.com/api/v1/orders/6040
+    body:
+      encoding: UTF-8
+      string: "{}"
+    headers:
+      User-Agent:
+      - Faraday v1.0.0
+      Authorization:
+      - Basic <BASIC_AUTH_CREDENTIALS>
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 404
+      message: ''
+    headers:
+      Cache-Control:
+      - no-cache="set-cookie"
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 27 Mar 2020 09:18:22 GMT
+      Server:
+      - Apache/2.4.41 (Amazon) OpenSSL/1.0.2k-fips
+      Set-Cookie:
+      - AWSELB=036F657F0634187E8AEE2B6D439EB9207ABAAFB7D1AFD302B66A81D620643CF9055DEFBDA0BAC67EFE33EC51B67FE94AECA64B5B3BE281CED4D1289A3CF0F1CB4C98CCBD3F;PATH=/;MAX-AGE=600
+      - AWSELBCORS=036F657F0634187E8AEE2B6D439EB9207ABAAFB7D1AFD302B66A81D620643CF9055DEFBDA0BAC67EFE33EC51B67FE94AECA64B5B3BE281CED4D1289A3CF0F1CB4C98CCBD3F;PATH=/;MAX-AGE=600;SECURE;SAMESITE=None
+      - JSESSIONID=6D70884B656662D3E4A364B5FF3E2E75; Path=/; Secure; HttpOnly
+      - grails_remember_me=dGZEVkZ6ckoxaXlaenM4ZDUwaUp2Zz09Oks4VlF4dGMyV0pmWFlnVC9OSG5CL0E9PQ;
+        Max-Age=1209600; Expires=Fri, 10-Apr-2020 09:18:23 GMT; Path=/; Secure; HttpOnly
+      X-Application-Context:
+      - application:production
+      Content-Length:
+      - '52'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"field":null,"message":"This order does not exist"}'
+    http_version: 
+  recorded_at: Fri, 27 Mar 2020 09:18:23 GMT
+recorded_with: VCR 3.0.3

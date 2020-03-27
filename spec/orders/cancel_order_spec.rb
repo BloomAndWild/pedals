@@ -19,6 +19,7 @@ describe Pedals::Orders::CancelOrder do
           response = described_class.new(
             payload: payload
           ).execute
+
           expect(response.code).to eq(200)
           expect(response.body[:status]).to eq('cancelled')
           expect(response.body[:refundAmount]).to eq(1006)
@@ -28,13 +29,20 @@ describe Pedals::Orders::CancelOrder do
     end
 
     context 'when order is already cancelled' do
+      let(:error_response_json) do
+        { "field" => nil, "message" => "This order is already cancelled" }
+      end
+
       it 'raises an exception' do
-        VCR.use_cassette('already_cancelled_order_request') do
-          expect do
+        expect do
+          VCR.use_cassette('already_cancelled_order_request') do
             described_class.new(payload: payload).execute
-          end.to raise_exception(Pedals::Errors::ResponseError,
-                                 'This order is already cancelled')
-        end
+          rescue Pedals::Errors::ResponseError => e
+            expect(e.status).to eq 422
+            expect(JSON.parse(e.body)).to eq error_response_json
+            raise e
+          end
+        end.to raise_exception(Pedals::Errors::ResponseError)
       end
     end
   end
