@@ -199,6 +199,16 @@ The call to above operation will return response object with two public methods.
 ``code`` - Status code e.g ``200``
 Pedals API endpoint: https://test.pedals-delivery.com/api/v1/orders/{order_id}
 
+## Running specs
+
+To run the specs, add your development credentials to your dev env: 
+```
+# These are fake credentials
+SANDBOX_BASE_URL=https://test.pedals-delivery.com
+SANDBOX_USERNAME=test@test.com
+SANDBOX_PASSWORD=password
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/pedals. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
